@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelHub - Website Travelling Terbaik</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #4b5563;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #2563eb;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                        url('https://images.unsplash.com/photo-1764022398523-cb127ab75581?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-box {
+            background: white;
+            padding: 1rem;
+            border-radius: 1rem;
+            display: flex;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            padding: 0.5rem;
+            color: #333;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        .section-title p {
+            font-size: 1.25rem;
+            color: #6b7280;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .feature-card {
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: #dbeafe;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+
+        /* Destinations Section */
+        .destinations {
+            padding: 5rem 2rem;
+            background: #f9fafb;
+        }
+
+        .filter-bar {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .filter-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #374151;
+        }
+
+        .category-filters {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            background: #f3f4f6;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .sort-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .sort-container select {
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            outline: none;
+        }
+
+        .destination-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .destination-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px rgba(0,0,0,0.15);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-category {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: #f3f4f6;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+            color: #1f2937;
+        }
+
+        .card-location {
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            color: #6b7280;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-info {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .card-rating, .card-duration {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.875rem;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-price {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 1rem;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            color: #1f2937;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #2563eb;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-block {
+            flex: 1;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-secondary:hover {
+            background: #f9fafb;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 5rem 2rem;
+            background: #2563eb;
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: #2563eb;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1f2937;
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            background: #374151;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            transition: background 0.3s;
+        }
+
+        .social-btn:hover {
+            background: #2563eb;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.25rem;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .destination-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #6b7280;
+        }
+
+        .no-results h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                ✈️ TravelHub
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#destinations">Destinasi</a></li>
+                <li><a href="#packages">Paket</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#contact">Kontak</a></li>
+                <li><button class="btn btn-primary" onclick="scrollToPackages()">Book Sekarang</button></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Temukan Petualangan Impian Anda</h1>
+            <p>Jelajahi destinasi menakjubkan di seluruh dunia dengan paket travel terbaik</p>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Mau kemana?" />
+                <button class="btn btn-primary" onclick="searchDestinations()">🔍 Cari</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="about" class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Mengapa Pilih TravelHub</h2>
+                <p>Kami menyediakan pengalaman perjalanan terbaik dengan layanan yang tak tertandingi</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>200+ Destinasi</h3>
+                    <p>Jelajahi tempat-tempat menakjubkan di seluruh dunia</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Aman & Terpercaya</h3>
+                    <p>Keamanan Anda adalah prioritas utama kami</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Pemenang Penghargaan</h3>
+                    <p>Diakui karena keunggulan dalam perjalanan</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⏰</div>
+                    <h3>Dukungan 24/7</h3>
+                    <p>Selalu siap membantu kapan pun Anda butuhkan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section id="packages" class="destinations">
+        <div class="container">
+            <div class="section-title">
+                <h2>Destinasi Populer</h2>
+                <p>Temukan pilihan paket perjalanan menakjubkan yang kami rekomendasikan</p>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+                <div class="filter-title">Filter berdasarkan Kategori</div>
+                <div class="category-filters" id="categoryFilters">
+                    <button class="filter-btn active" data-category="All">Semua</button>
+                    <button class="filter-btn" data-category="Mountain">Gunung</button>
+                    <button class="filter-btn" data-category="Beach">Pantai</button>
+                    <button class="filter-btn" data-category="City">Kota</button>
+                    <button class="filter-btn" data-category="Desert">Gurun</button>
+                </div>
+                <div class="sort-container">
+                    <label for="sortSelect">Urutkan:</label>
+                    <select id="sortSelect" onchange="sortDestinations()">
+                        <option value="popular">Paling Populer</option>
+                        <option value="price-low">Harga: Rendah ke Tinggi</option>
+                        <option value="price-high">Harga: Tinggi ke Rendah</option>
+                        <option value="rating">Rating Tertinggi</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Destination Cards -->
+            <div class="destination-grid" id="destinationGrid"></div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta">
+        <div class="container">
+            <h2>Siap Memulai Perjalanan Anda?</h2>
+            <p>Hubungi tim ahli perjalanan kami dan rencanakan liburan impian Anda hari ini</p>
+            <div class="cta-buttons">
+                <button class="btn btn-white">Hubungi Kami</button>
+                <button class="btn btn-outline">Lihat Semua Paket</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>✈️ TravelHub</h3>
+                    <p>Partner terpercaya Anda untuk pengalaman perjalanan tak terlupakan di seluruh dunia.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-btn">f</a>
+                        <a href="#" class="social-btn">t</a>
+                        <a href="#" class="social-btn">i</a>
+                        <a href="#" class="social-btn">@</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#destinations">Destinasi</a></li>
+                        <li><a href="#packages">Paket</a></li>
+                        <li><a href="#about">Tentang Kami</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Dukungan</h3>
+                    <ul>
+                        <li><a href="#">Pusat Bantuan</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Hubungi Kami</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Kontak Info</h3>
+                    <ul>
+                        <li>Jl. Perjalanan No. 123</li>
+                        <li>Jakarta, Indonesia 12345</li>
+                        <li>Phone: +62 812 3456 7890</li>
+                        <li>Email: info@travelhub.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 TravelHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Booking Trip Anda</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="bookingForm" onsubmit="submitBooking(event)">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fullName">👤 Nama Lengkap</label>
+                            <input type="text" id="fullName" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">📧 Email</label>
+                            <input type="email" id="email" required placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">📱 No. Telepon</label>
+                            <input type="tel" id="phone" required placeholder="+62 812 3456 7890">
+                        </div>
+                        <div class="form-group">
+                            <label for="travelers">👥 Jumlah Traveler</label>
+                            <input type="number" id="travelers" min="1" value="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="departureDate">📅 Tanggal Keberangkatan</label>
+                            <input type="date" id="departureDate" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="specialRequests">💬 Permintaan Khusus (Opsional)</label>
+                        <textarea id="specialRequests" rows="4" placeholder="Permintaan atau preferensi khusus..."></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-block" onclick="closeModal()">Batal</button>
+                        <button type="submit" class="btn btn-primary btn-block">Konfirmasi Booking</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data Destinations
+        const destinations = [
+            {
+                id: 1,
+                name: "Swiss Alps Adventure",
+                location: "Switzerland",
+                image: "https://images.unsplash.com/photo-1631684188521-28b3fd9f40e8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+                price: 2499,
+                rating: 4.9,
+                days: 7,
+                category: "Mountain",
+                description: "Nikmati pemandangan alpine yang menakjubkan, lembah yang indah, dan jalur hiking kelas dunia di jantung Swiss Alps."
+            },
+            {
+                id: 2,
+                name: "Maldives Paradise",
+                location: "Maldives",
+                image: "https://images.unsplash.com/photo-1660315247626-12267f8d68db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+                price: 3299,
+                rating: 5.0,
+                days: 5,
+                category: "Beach",
+                description: "Villa mewah di atas air, air laut biru jernih, dan pantai pasir putih menanti Anda di surga tropis ini."
+            },
+            {
+                id: 3,
+                name: "Chicago Urban Explorer",
+                location: "United States",
+                image: "https://images.unsplash.com/photo-1760440315603-5d313f74a67b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+                price: 1899,
+                rating: 4.7,
+                days: 4,
+                category: "City",
+                description: "Temukan arsitektur ikonik, museum kelas dunia, budaya yang hidup, dan pemandangan tepi danau yang menakjubkan."
+            },
+            {
+                id: 4,
+                name: "Sahara Desert Odyssey",
+                location: "Morocco",
+                image: "https://images.unsplash.com/photo-1762813327166-0015a9b89408?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+                price: 2799,
+                rating: 4.8,
+                days: 6,
+                category: "Desert",
+                description: "Mulailah perjalanan melintasi bukit pasir emas, kasbah kuno, dan rasakan budaya Berber tradisional di bawah langit berbintang."
+            },
+            {
+                id: 5,
+                name: "Rainbow Mountain Trek",
+                location: "Peru",
+                image: "https://images.unsplash.com/photo-1673505413397-0cd0dc4f5854?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+                price: 1999,
+                rating: 4.8,
+                days: 5,
+                category: "Mountain",
+                description: "Trekking melalui lanskap menakjubkan untuk menyaksikan keajaiban geologis berwarna-warni Vinicunca, Gunung Pelangi Peru."
+            },
+            {
+                id: 6,
+                name: "Tropical Beach Escape",
+                location: "Bali, Indonesia",
+                image: "https://images.unsplash.com/photo-1660207766597-b3ea1c6d5c37?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+                price: 2199,
+                rating: 4.9,
+                days: 7,
+                category: "Beach",
+                description: "Bersantai di pantai yang indah, jelajahi candi kuno, dan nikmati budaya dan kuliner Bali yang kaya."
+            },
+            {
+                id: 7,
+                name: "Desert Rock Formations",
+                location: "Arizona, USA",
+                image: "https://images.unsplash.com/photo-1768519926223-fea09f9d74fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+                price: 1599,
+                rating: 4.6,
+                days: 4,
+                category: "Desert",
+                description: "Jelajahi lanskap gurun yang dramatis, formasi batu merah yang menjulang, dan saksikan matahari terbenam yang menakjubkan."
+            },
+            {
+                id: 8,
+                name: "European City Tour",
+                location: "Germany",
+                image: "https://images.unsplash.com/photo-1761472871833-16399fde43fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+                price: 2899,
+                rating: 4.7,
+                days: 8,
+                category: "City",
+                description: "Perjalanan melalui kota-kota Eropa bersejarah, rasakan budaya yang kaya, arsitektur menakjubkan, dan kuliner terkenal."
+            }
+        ];
+
+        let filteredDestinations = [...destinations];
+        let currentCategory = "All";
+        let currentSort = "popular";
+        let searchQuery = "";
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            renderDestinations();
+            setupCategoryFilters();
+        });
+
+        // Setup Category Filters
+        function setupCategoryFilters() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCategory = this.dataset.category;
+                    filterAndRenderDestinations();
+                });
+            });
+        }
+
+        // Filter and Render
+        function filterAndRenderDestinations() {
+            filteredDestinations = destinations.filter(dest => {
+                const matchesCategory = currentCategory === "All" || dest.category === currentCategory;
+                const matchesSearch = searchQuery === "" ||
+                    dest.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    dest.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    dest.category.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            sortDestinations();
+        }
+
+        // Sort Destinations
+        function sortDestinations() {
+            const sortSelect = document.getElementById('sortSelect');
+            currentSort = sortSelect.value;
+
+            switch(currentSort) {
+                case 'price-low':
+                    filteredDestinations.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    filteredDestinations.sort((a, b) => b.price - a.price);
+                    break;
+                case 'rating':
+                    filteredDestinations.sort((a, b) => b.rating - a.rating);
+                    break;
+                default:
+                    filteredDestinations = [...destinations].filter(dest => {
+                        const matchesCategory = currentCategory === "All" || dest.category === currentCategory;
+                        const matchesSearch = searchQuery === "" ||
+                            dest.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                            dest.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                            dest.category.toLowerCase().includes(searchQuery.toLowerCase());
+                        return matchesCategory && matchesSearch;
+                    });
+            }
+
+            renderDestinations();
+        }
+
+        // Render Destinations
+        function renderDestinations() {
+            const grid = document.getElementById('destinationGrid');
+
+            if (filteredDestinations.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-results" style="grid-column: 1/-1;">
+                        <h3>Tidak ada destinasi yang ditemukan</h3>
+                        <p>Coba ubah filter atau pencarian Anda</p>
+                        <button class="btn btn-primary" onclick="resetFilters()">Reset Filter</button>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filteredDestinations.map(dest => `
+                <div class="destination-card">
+                    <img src="${dest.image}" alt="${dest.name}" class="card-image">
+                    <div class="card-content">
+                        <span class="card-category">${dest.category}</span>
+                        <div class="card-location">📍 ${dest.location}</div>
+                        <h3 class="card-title">${dest.name}</h3>
+                        <p class="card-description">${dest.description}</p>
+                        <div class="card-info">
+                            <div class="card-rating">⭐ ${dest.rating}</div>
+                            <div class="card-duration">📅 ${dest.days} Hari</div>
+                        </div>
+                        <div class="card-footer">
+                            <div>
+                                <div style="font-size: 0.875rem; color: #6b7280;">Mulai dari</div>
+                                <div class="card-price">$${dest.price}</div>
+                            </div>
+                            <button class="btn btn-primary" onclick="openBookingModal(${dest.id})">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Search Destinations
+        function searchDestinations() {
+            const input = document.getElementById('searchInput');
+            searchQuery = input.value;
+            filterAndRenderDestinations();
+            scrollToPackages();
+        }
+
+        // Reset Filters
+        function resetFilters() {
+            searchQuery = "";
+            currentCategory = "All";
+            document.getElementById('searchInput').value = "";
+            document.getElementById('sortSelect').value = "popular";
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.category === "All") btn.classList.add('active');
+            });
+            filterAndRenderDestinations();
+        }
+
+        // Modal Functions
+        let selectedDestinationId = null;
+
+        function openBookingModal(destinationId) {
+            selectedDestinationId = destinationId;
+            document.getElementById('bookingModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('bookingModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            document.getElementById('bookingForm').reset();
+        }
+
+        function submitBooking(event) {
+            event.preventDefault();
+            const destination = destinations.find(d => d.id === selectedDestinationId);
+            alert(`Booking berhasil!\n\nTerima kasih telah memesan ${destination.name}.\nTim kami akan segera menghubungi Anda.`);
+            closeModal();
+        }
+
+        // Utility Functions
+        function scrollToPackages() {
+            document.getElementById('packages').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('bookingModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
